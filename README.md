@@ -1,0 +1,1 @@
+Esse projeto contém aplicação de um algoritmo KNN para a resolução de um problema para fins de estudo.
