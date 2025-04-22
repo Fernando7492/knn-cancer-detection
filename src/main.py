@@ -1,6 +1,6 @@
 import pandas as pd
 from src.outliers_detection import outliers_por_coluna
-from src.preprocessing import binarizar_col
+from src.preprocessing import binarizar_col, escalar_col
 
 data = pd.read_csv("data/breast-cancer-winsconsin-data.csv",sep=",",encoding="utf-8")
 data = data.drop(columns=['id'])
@@ -12,9 +12,7 @@ data = binarizar_col("diagnosis",data)
 print("Outliers por coluna:")
 print(outliers_por_coluna(data))
 
-print(data.shape)
-print(data.dtypes)
-print(data.describe().T)
-print(data.isna().sum())
+df_escalado = escalar_col(data)
+
 
 
