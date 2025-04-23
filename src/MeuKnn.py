@@ -27,5 +27,4 @@ class MeuKnn:
         d = 0
         for x1,x2 in zip(x,y):
             d += (x1 - x2)**2
-            d = math.sqrt(d)
-        return d
+        return math.sqrt(d)
