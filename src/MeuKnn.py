@@ -19,8 +19,8 @@ class MeuKnn:
             x_treino (Numpy array): Um array numpy contendo os atributos dos elementos
             y_treino (Numpy array): Um array numpy contendo as classes dos elementos
         """
-        self.x_treino = x_treino
-        self.y_treino = y_treino
+        self.x_treino = np.array(x_treino)
+        self.y_treino = np.array(y_treino)
 
 
     def calcular_distancia(self,x,y):
@@ -59,7 +59,7 @@ class MeuKnn:
     
     def predict(self,x_teste, dist=True):
         lista = []
-        
+        x_teste = np.array(x_teste)
         for x_novo in x_teste:
             vizinhos_ind, vizinhos_dist = self.achar_vizinhos(x_novo)
             vizinhos_labels = self.y_treino[vizinhos_ind]

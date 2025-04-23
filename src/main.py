@@ -31,8 +31,8 @@ y_pred = modelo_knn.predict(x_teste)
 
 #MeuKnn
 meuKnn = MeuKnn(k=k)
-meuKnn.fit(x_treino.values,y_treino.values)
-y_pred_manual = meuKnn.predict(x_teste.values)
+meuKnn.fit(x_treino,y_treino)
+y_pred_manual = meuKnn.predict(x_teste)
 
 
 testar_modelo(y_teste,y_pred)
