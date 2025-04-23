@@ -49,11 +49,15 @@ class MeuKnn:
             else:
                 votos[labels] = 1
         
-        mais_votado = None
-        maior_contagem = -1
-        for label,cont in votos.items():
-            if cont > maior_contagem:
-                maior_contagem = cont
-                mais_votado = label
+        #mais_votado = None
+        #maior_contagem = -1
+        #for label,cont in votos.items():
+        #    if cont > maior_contagem:
+        #        maior_contagem = cont
+        #        mais_votado = label
+
+        max_votos = max(votos.values())
+        candidatos = [label for label,cont in votos.items() if cont == max_votos]
+        mais_votado = max(candidatos)
         
         return mais_votado
