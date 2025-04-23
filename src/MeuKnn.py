@@ -39,3 +39,21 @@ class MeuKnn:
         vizinhos_ind = d_indices_ord[:self.k]
         vizinhos_dist = dist_array[vizinhos_ind]
         return vizinhos_ind,vizinhos_dist
+    
+    def _votar(self,vizinhos_labels,vizinhos_distancias=None):
+        
+        votos = {}
+        for labels in vizinhos_labels:
+            if labels in votos:
+                votos[labels] += 1
+            else:
+                votos[labels] = 1
+        
+        mais_votado = None
+        maior_contagem = -1
+        for label,cont in votos.items():
+            if cont > maior_contagem:
+                maior_contagem = cont
+                mais_votado = label
+        
+        return mais_votado
