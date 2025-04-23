@@ -57,12 +57,14 @@ class MeuKnn:
         
         return mais_votado
     
-    def predict(self,x_teste):
+    def predict(self,x_teste, dist=True):
         lista = []
         
         for x_novo in x_teste:
             vizinhos_ind, vizinhos_dist = self.achar_vizinhos(x_novo)
             vizinhos_labels = self.y_treino[vizinhos_ind]
-            lista.append(self._votar(vizinhos_labels,vizinhos_dist))
-        
+            if dist:
+                lista.append(self._votar(vizinhos_labels,vizinhos_dist))
+            else:
+                list.append(self.votar(vizinhos_labels))
         return np.array(lista)

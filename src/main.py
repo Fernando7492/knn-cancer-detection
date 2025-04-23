@@ -6,7 +6,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from src.testar_modelo import testar_modelo
 from src.MeuKnn import MeuKnn
 
-k = 3
+k = 9
 
 data = pd.read_csv("data/breast-cancer-winsconsin-data.csv",sep=",",encoding="utf-8")
 data = data.drop(columns=['id'])
