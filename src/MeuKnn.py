@@ -21,3 +21,11 @@ class MeuKnn:
         """
         self.x_treino = x_treino
         self.y_treino = y_treino
+
+
+    def calcular_distancia(self,x,y):
+        d = 0
+        for x1,x2 in zip(x,y):
+            d += (x1 - x2)**2
+            d = math.sqrt(d)
+        return d
