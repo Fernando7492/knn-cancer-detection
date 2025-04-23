@@ -6,6 +6,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from src.testar_modelo import testar_modelo
 from src.MeuKnn import MeuKnn
 
+k = 3
 
 data = pd.read_csv("data/breast-cancer-winsconsin-data.csv",sep=",",encoding="utf-8")
 data = data.drop(columns=['id'])
@@ -24,12 +25,12 @@ y = df_escalado['diagnosis']
 x_treino, x_teste, y_treino, y_teste = train_test_split(x,y,test_size=0.2,random_state=42)
 
 #Sklearn - KNN
-modelo_knn = KNeighborsClassifier(n_neighbors=8)
+modelo_knn = KNeighborsClassifier(n_neighbors=k)
 modelo_knn.fit(x_treino,y_treino)
 y_pred = modelo_knn.predict(x_teste)
 
 #MeuKnn
-meuKnn = MeuKnn(k=8)
+meuKnn = MeuKnn(k=k)
 meuKnn.fit(x_treino.values,y_treino.values)
 y_pred_manual = meuKnn.predict(x_teste.values)
 
