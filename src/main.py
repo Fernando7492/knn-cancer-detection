@@ -4,6 +4,7 @@ from src.preprocessing import binarizar_col, escalar_col
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 
 data = pd.read_csv("data/breast-cancer-winsconsin-data.csv",sep=",",encoding="utf-8")
 data = data.drop(columns=['id'])
@@ -25,6 +26,13 @@ modelo_knn = KNeighborsClassifier(n_neighbors=5)
 modelo_knn.fit(x_treino,y_treino)
 
 y_pred = modelo_knn.predict(x_teste)
+
+#Acuracia
 acuracia = accuracy_score(y_teste,y_pred)
 
+#Report de classificação
+report = classification_report(y_teste,y_pred,target_names=['Benigno','Maligno'])
+
+
 print(f'ACURACIA: {acuracia}')
+print(report)
