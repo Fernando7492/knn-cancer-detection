@@ -1,12 +1,14 @@
+from pyexpat import model
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 
 from src.MeuKnn import MeuKnn
 from src.preprocessing import binarizar_col, escalar_col
 
 
-def testar_parametros():
+def testar_parametros(criar_modelo,nome):
     data = pd.read_csv("data/breast-cancer-winsconsin-data.csv",sep=",",encoding="utf-8")
     data = data.drop(columns=['id'])
 
@@ -24,11 +26,14 @@ def testar_parametros():
         "peso": [],
         "uniforme": []
     }
-    for k in range(1,20):
-        knn = MeuKnn(k)
-        knn.fit(x_treino.values,y_treino.values)
+    for k in range(1,21):
         for opt in [True,False]:
-            y_pred = knn.predict(x_teste.values,opt)
+            knn = criar_modelo(k,opt)
+            knn.fit(x_treino,y_treino)
+            if nome == "sklearn":
+                y_pred = knn.predict(x_teste)
+            else: 
+                y_pred = knn.predict(x_teste, dist=opt)
             acuracia = accuracy_score(y_teste.values,y_pred)
             lista_acuracias.append(acuracia)
             if opt:
@@ -43,6 +48,15 @@ def exibir_resultados(resultado):
         for k, acc in valores:
             print(f"k={k}, acurácia={acc:.4f}")
 
+def criar_meu_knn(k, dist):
+    return MeuKnn(k)
+
+def criar_sklearn_knn(k, dist):
+    return KNeighborsClassifier(n_neighbors=k, weights="distance" if dist else "uniform")
 
 if __name__ == "__main__":
-    testar_parametros()
+    print("Resultados MeuKnn:")
+    testar_parametros(criar_meu_knn, "meu")
+
+    print("\nResultados KNeighborsClassifier:")
+    testar_parametros(criar_sklearn_knn, "sklearn")
