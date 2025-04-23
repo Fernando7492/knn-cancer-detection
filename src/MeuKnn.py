@@ -28,3 +28,14 @@ class MeuKnn:
         for x1,x2 in zip(x,y):
             d += (x1 - x2)**2
         return math.sqrt(d)
+
+    
+    def achar_vizinhos(self,x_novo):
+        dist = []
+        for x in self.x_treino:
+            dist.append(self.calcular_distancia(x_novo,x))
+        dist_array = np.array(dist)
+        d_indices_ord = np.argsort(dist_array)
+        vizinhos_ind = d_indices_ord[:self.k]
+        vizinhos_dist = dist_array[vizinhos_ind]
+        return vizinhos_ind,vizinhos_dist
