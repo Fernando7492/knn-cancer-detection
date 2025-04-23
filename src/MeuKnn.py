@@ -66,5 +66,5 @@ class MeuKnn:
             if dist:
                 lista.append(self._votar(vizinhos_labels,vizinhos_dist))
             else:
-                list.append(self.votar(vizinhos_labels))
+                lista.append(self._votar(vizinhos_labels))
         return np.array(lista)
