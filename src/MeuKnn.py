@@ -43,8 +43,13 @@ class MeuKnn:
     def _votar(self,vizinhos_labels,vizinhos_distancias=None):
         
         votos = {}
-        for labels in vizinhos_labels:
-            votos[labels] = votos.get(labels,0)+1
+        if vizinhos_distancias is None:
+            for labels in vizinhos_labels:
+                votos[labels] = votos.get(labels,0)+1
+        else:
+            for label,dist in zip(vizinhos_labels,vizinhos_distancias):
+                peso = 1 / (dist + 1e-5)
+                votos[label] = votos.get(label,0)+peso
 
         max_votos = max(votos.values())
         candidatos = [label for label,cont in votos.items() if cont == max_votos]
